@@ -14,6 +14,9 @@ Domain informations Gathering such as :
 ![](https://i.imgur.com/cOhl8ec.gif)
 
 > root@h3x0 ~ % python3 FindMyAss.py
+## Report
+![](https://i.imgur.com/CoB7wjN.png)
+
 ## Community
 - Feel free to submit a Pull Request & leave a star to share some love if this helped you.
 ## What's Next
