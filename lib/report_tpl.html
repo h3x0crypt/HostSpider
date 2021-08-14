@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+      <title>{{ data.domain }} - Report {{ data.report_number }}</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+   </head>
+   <body>
+      <header></header>
+      <nav class="navbar navbar-light navbar-expand-md">
+         <div class="container-fluid">
+            <a class="navbar-brand" href="https://{{ data.domain }}" target="_blank">{{ data.domain }}</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+               <ul class="navbar-nav">
+                  <li class="nav-item"><a class="nav-link active" href="#">Report #{{ data.report_number }}</a></li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+      <div class="container">
+         <h1>Subdomains</h1>
+         <p> Alexa rank : {{ data.alexa }}</p>
+         <p> {{data.domain}} have <b>{{ data.subdomains_count }}</b> subdomain</p>
+         <div class="row">
+            <div class="col-md-4 col-lg-12">
+               <div class="table-responsive">
+                  <table class="table">
+                     <thead>
+                        <tr>
+                           <th><strong>Domain</strong></th>
+                           <th><strong>Hosting Provider</strong></th>
+                           <th><strong>Mail Provider</strong></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {% for subdomain in data.subdomains %}
+                           <tr>
+                              <td><a href="{{ subdomain.0 }}">{{ subdomain.0 }}</a></td>
+                              <td>
+                                 {% for subdomain_host_provider in subdomain.1 %}
+                                    {{ subdomain_host_provider }}
+                                 {% endfor %}
+                              </td>
+                              <td>
+                                 {% for subdomain_mail_provider in subdomain.2 %}
+                                       {{ subdomain_mail_provider }}
+                                 {% endfor %}
+                              </td>
+                           </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="container">
+         <h1>DNS Records</h1>
+         <div class="row">
+            <div class="col-md-4 col-lg-12">
+               <h4>1. A Records</h4>
+               <div class="table-responsive">
+                  <table class="table">
+                     <thead>
+                        <tr>
+                           <th><strong>IP Address</strong></th>
+                           <th><strong>Organization</strong><br></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {% for a_record in data.a_records %}
+                           <tr>
+                              <td>{{ a_record.0 }}</td>
+                              <td>{{ a_record.1 }}</td>
+                           </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class="col-md-4 col-lg-12">
+               <h4>2. AAAA Records</h4>
+               <div class="table-responsive">
+                  <table class="table">
+                     <thead>
+                        <tr>
+                           <th><strong>IPv6</strong><br></th>
+                           <th><strong>Organization</strong><br></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {% for aaaa_record in data.aaaa_records %}
+                           <tr>
+                              <td>{{ aaaa_record.0 }}</td>
+                              <td>{{ aaaa_record.1 }}</td>
+                           </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class="col-md-4 col-lg-12">
+               <h4>3. MX Records</h4>
+               <div class="table-responsive">
+                  <table class="table">
+                     <thead>
+                        <tr>
+                           <th><strong>Mail Servers</strong><br></th>
+                           <th><strong>Organization</strong><br></th>
+                           <th><strong>Priority</strong></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                        {% for mx_record in data.mx_records %}
+                           <tr>
+                              <td>{{ mx_record.0 }}</td>
+                              <td>{{ mx_record.1 }}</td>
+                              <td>{{ mx_record.2 }}</td>
+                           </tr>
+                        {% endfor %}
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class="col-md-4 col-lg-12">
+               <h4>4. NS Records</h4>
+               <div class="table-responsive">
+                  <table class="table">
+                     <thead>
+                        <tr>
+                           <th><strong>Name Servers</strong><br></th>
+                           <th><strong>Organization</strong><br></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {% for ns_record in data.ns_records %}
+                           <tr>
+                              <td>{{ ns_record.0 }}</td>
+                              <td>{{ ns_record.1 }}</td>
+                           </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class="col-md-4 col-lg-12">
+               <h4>5. SOA Records</h4>
+               <div class="table-responsive">
+                  <table class="table">
+                     <thead>
+                        <tr>
+                           <th><strong>Email</strong><br></th>
+                           <th><strong>TTL</strong><br></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>{{ data.soa_records.0 }}</td>
+                           <td>{{ data.soa_records.2 }}</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class="col-md-4 col-lg-12">
+               <h4>6. TXT Records</h4>
+               <div class="table-responsive">
+                  <table class="table">
+                     <thead>
+                        <tr>
+                           <th><strong>TXT Values</strong><br></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {% for txt_record in data.txt_records %}
+                           <tr>
+                              <td>{{ txt_record }}</td>
+                           </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="container">
+         <h1>Whois</h1>
+         <div class="row">
+            <div class="col">
+               <code class="text-muted">
+                  {{ data.whois }}
+               </code>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <hr>
+      <div class="container">
+         <p>FindMyass Tool on&nbsp;<a href="#">Github</a>&nbsp; - Report generated on {{ data.report_time }}</p>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+   </body>
+</html>
