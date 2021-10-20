@@ -3,3 +3,4 @@ validators~=0.18.2
 Jinja2~=3.0.1
 bs4~=0.0.1
 beautifulsoup4~=4.9.3
+html5lib~=1.1
